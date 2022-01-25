@@ -18,6 +18,23 @@ def scaled_dot_product(Q, K, V, return_att=False):
     else:
         return mean_values
 
+
+def dot_product(Q, K, V, return_att=False):
+    '''
+    Input: Q,K,V shape may be [Batch, Heads, T, Dk], 
+            Dk is the dim of the token, T is the length of the sequence.
+    output: [B, H, T, Dk], [B, H, T, T]
+    '''
+    K_T = K.transpose(-1, -2)
+    att_weight = F.softmax(torch.matmul(Q, K_T), dim=-1)
+    mean_values = torch.matmul(att_weight, V)
+
+    if return_att:
+        return mean_values, att_weight
+    else:
+        return mean_values
+
+
 if __name__ == "__main__":
     q = torch.randn(8, 4, 10, 8)
     k = torch.randn(8, 4, 10, 8)
