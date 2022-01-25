@@ -1,4 +1,6 @@
-from dot_product import scaled_dot_product
+import sys,os
+sys.path.append(os.getcwd())
+from utils.dot_product import scaled_dot_product
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
