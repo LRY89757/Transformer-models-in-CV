@@ -5,6 +5,7 @@ it occured me that I could us the im2col function to solve this problem.
 '''
 
 import numpy as np
+import torch
 import sys,os
 sys.path.append(os.getcwd())
 print(os.getcwd())
@@ -44,7 +45,7 @@ class Img2Patch():
 
     def __call__(self, x):
         col = self.im2col(x)
-        return col
+        return torch.Tensor(col)
         
 
 if __name__ == "__main__":
@@ -65,5 +66,3 @@ if __name__ == "__main__":
     im2patch = Img2Patch(kernel_size=4, stride=4)
     img_patches = im2patch(CIFAR_images)
     print(img_patches.shape)
-
-
