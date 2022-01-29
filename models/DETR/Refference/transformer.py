@@ -162,3 +162,22 @@ def withPosEmbed(tensor: Tensor, pos: Optional[Tensor] = None) -> Tensor:
 
 def getClones(module: nn.Module, N: int) -> nn.ModuleList:
     return nn.ModuleList([deepcopy(module) for _ in range(N)])
+
+if __name__ == "__main__":
+    src = torch.rand(32, 256, 18, 18)
+    # mask = 
+    mask = torch.zeros(32, 18, 18)
+    query = torch.rand(8, 256)
+    pos = torch.rand(32, 256, 18, 18)
+    print("src shape:", src.flatten(2).permute(2, 0, 1).shape)
+    print("mask shape:", mask.flatten(1).shape)
+    print("query shape:", query.unsqueeze(1).repeat(1, 32, 1).shape)
+    print("pos shape:", pos.flatten(2).permute(2, 0, 1).shape)
+    transformer = Transformer(hiddenDims=256, numHead=8, numEncoderLayer=4, numDecoderLayer=4, dimFeedForward=36, dropout=0.5)
+    print("output of encoder:", transformer.encoder(src.flatten(2).permute(2, 0, 1), srcKeyPaddingMask=mask.flatten(1), pos=pos.flatten(2).permute(2, 0, 1)).shape)
+    print("output of decoder:", transformer(src, mask, query, pos).transpose(1, 2).shape)
+    print("output of transformer:", transformer(src, mask, query, pos).shape)
+
+
+
+

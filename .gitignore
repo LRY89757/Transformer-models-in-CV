@@ -19,6 +19,7 @@ _book
 __pycache__/
 # add Refference
 Refference/
+models/DETR/Refference
 # refer to facebookrearch, add many ignore of python output files
 .nfs*
 *.ipynb

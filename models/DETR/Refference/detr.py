@@ -116,3 +116,10 @@ def buildInferenceModel(args, quantize=False):
     print('optimizing model for inference...')
     return torch.jit.trace(wrapper, (torch.rand(1, 3, args.targetHeight, args.targetWidth).to(device),
                                      torch.as_tensor([args.targetWidth, args.targetHeight]).unsqueeze(0).to(device)))
+
+
+if __name__ == "__main__":
+    args = {
+        
+    }
+
