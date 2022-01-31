@@ -32,8 +32,9 @@ class DETR_demo(nn.Module):
         super().__init__()
 
         self.backbone = resnet50()
+        del self.backbone.fc
 
-        self.transitionlayer = nn.Conv2d(2048, hidden_dim, 1)
+        self.conv = nn.Conv2d(2048, hidden_dim, 1)
 
         self.transformer = nn.Transformer(d_model=hidden_dim, nhead=nheads, 
                 num_encoder_layers=encodernums, num_decoder_layers=decodernums)
@@ -66,7 +67,7 @@ class DETR_demo(nn.Module):
 
 
 
-        features = self.transitionlayer(features) # [B, 256, H, W]
+        features = self.conv(features) # [B, 256, H, W]
         B, _, H, W = features.size()
 
         querypos = self.query_pos.unsqueeze(1)   # please refer to https://pytorch.org/docs/stable/generated/torch.Tensor.repeat.html#torch-tensor-repeat
