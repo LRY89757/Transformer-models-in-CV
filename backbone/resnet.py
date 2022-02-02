@@ -213,8 +213,12 @@ if __name__=='__main__':
     #model = torchvision.models.resnet50()
     print("found ", torch.cuda.device_count(), " GPU(s)")
     device = torch.device("cuda")
-    model = resnet101(detection=True).to(device)
+    # model = resnet101(detection=True).to(device)
+    model = resnet50(pretrained=True)
+    model.to(device)
     print(model)
 
     input = torch.randn(1, 3, 512, 512).to(device)
     output = model(input)
+    c3, c4, c5 = output
+    print(c3.shape, c4.shape, c5.shape)
