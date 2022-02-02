@@ -1,6 +1,8 @@
 import torch
 from torch import nn
 import torch.nn.functional as F
+from torch import Tensor
+from typing import Optional
 
 
 def _getactiv(activ):
@@ -35,15 +37,15 @@ class EncoderLayer(nn.Module):
 
         self.norm_pre = norm_pre
 
-    def pos_emb(src, pos):
+    def pos_emb(self, src, pos):
         return src if pos is None else src + pos
     
     def forward_pre(self, tgt, pos):
         src = self.norm1(tgt)
-        q = k = pos_emb(src, pos)
+        q = k = self.pos_emb(src, pos)
         v = src
 
-        src = self.attn(q, k, v)
+        src = self.attn(q, k, v)[0]
         src = self.drop(src)
 
         src1 = src + tgt
@@ -56,10 +58,10 @@ class EncoderLayer(nn.Module):
 
 
     def forward_post(self, tgt, pos):
-        q = k = pos_emb(tgt, pos)
+        q = k = self.pos_emb(tgt, pos)
         v = tgt 
 
-        src = self.attn(q, k, v)
+        src = self.attn(q, k, v)[0]
         src1 = self.drop(src)
         src1 = src1 + src
         src2 = self.norm1(src1)
@@ -68,15 +70,16 @@ class EncoderLayer(nn.Module):
         out = self.norm2(src2 + src3)
         return out
 
-    def forward(self, tgt, pos):
+    def forward(self, tgt, pos:Optional[Tensor] = None):
         '''
         tgt's shape: [T, B, D]
         pos's shape: [T, B, D]
         '''
+        # print("hello")
         if self.norm_pre:
-            return self.forward_pre(tgt, pos), pos
+            return self.forward_pre(tgt, pos)
         else:
-            return self.forward_post(tgt, pos), pos
+            return self.forward_post(tgt, pos)
 
 
 
@@ -86,12 +89,18 @@ class EncoderLayer(nn.Module):
 class TransformerEncoder(nn.Module):
 
     def __init__(self, num_layers, embed_dim, num_heads, mlp_dim,
-                 activ = "relu", dropout=0.0, norm_pre=True):
+                 activ = "relu", dropout=0.1, norm_pre=True):
         super().__init__()
-        self.encoder = nn.Sequential(*[EncoderLayer(embed_dim, num_heads, mlp_dim, activ, dropout, norm_pre) for i in range(num_layers)])
+        # self.encoder = nn.Sequential(*[EncoderLayer(embed_dim, num_heads, mlp_dim, activ, dropout, norm_pre)
+        #                                  for i in range(num_layers)])
+        self.encoder = nn.ModuleList([EncoderLayer(embed_dim, num_heads, mlp_dim, activ, dropout, norm_pre)
+                                         for i in range(num_layers)])        
     
-    def forward(self, tgt, pos):
-        return self.encoder(tgt, pos)[0]
+    def forward(self, tgt, pos:Optional[Tensor] = None):
+        out = tgt
+        for layer in self.encoder:
+            out = layer(out, pos)
+        return out
 
 
 if __name__ == "__main__":
