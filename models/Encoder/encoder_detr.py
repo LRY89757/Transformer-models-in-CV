@@ -3,15 +3,9 @@ from torch import nn
 import torch.nn.functional as F
 from torch import Tensor
 from typing import Optional
-
-
-def _getactiv(activ):
-    if activ == "relu":
-        return nn.ReLU(inplace=True)
-    elif activ == "gelu":
-        return nn.GeLU(inplace=True)
-    elif activ == "glu":
-        return nn.GLU(inplace=True)
+import sys,os
+sys.path.append(os.getcwd())
+from utils.tools import _getactiv
 
 
 class EncoderLayer(nn.Module):
