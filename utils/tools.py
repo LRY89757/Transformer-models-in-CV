@@ -1,3 +1,5 @@
+from torch import nn
+
 def _getactiv(activ):
     if activ == "relu":
         return nn.ReLU(inplace=True)
