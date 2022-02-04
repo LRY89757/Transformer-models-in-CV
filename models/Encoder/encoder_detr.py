@@ -39,7 +39,7 @@ class EncoderLayer(nn.Module):
         q = k = self.pos_emb(src, pos)
         v = src
 
-        src = self.attn(q, k, v)[0]
+        src = self.attn(q, k, v)[0]   # return the tuple, so we should end with "[0]" to get the src
         src = self.drop(src)
 
         src1 = src + tgt
