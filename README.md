@@ -1,7 +1,8 @@
+<div id="top"></div>
+
 # Transformer-models-in-CV
 some basic transformer models about computer vision
 <!-- [![standard-readme compliant](https://img.shields.io/badge/readme%20style-standard-brightgreen.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme) -->
-<div id="top"></div>
 
 <!--
 *** Thanks for checking out the Best-README-Template. If you have a suggestion
@@ -35,7 +36,7 @@ some basic transformer models about computer vision
 
 <div align="center">
   <a href="https://github.com/LRY89757/Transformer-models-in-CV">
-    <img src="images/logo.png" alt="Logo" width="600" height="600">
+    <img src="images/logo.png" alt="Logo" width="400" height="400">
   </a>
 
 
@@ -100,7 +101,7 @@ I have inplemented the projects below:
 
 | Backbone | Models              | Demo for Inference |
 | -------- | ------------------- | ------------------ |
-| ✅ Resnet <br> ✅ Densenet <br> ✅ResNext | ✅ Vision Transformer <br> ✅ Transformer Encoder <br> ✅ Transfomer Decoder | ✅ Tiny DETR        |
+| ✅ Resnet <br> ✅ Densenet <br> ✅ ResNext | ✅ Vision Transformer <br> ✅ Transformer Encoder <br> ✅ Transfomer Decoder | ✅ Tiny DETR        |
 
 
 Under Construction:
