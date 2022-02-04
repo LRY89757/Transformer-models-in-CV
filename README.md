@@ -1,6 +1,6 @@
 # Transformer-models-in-CV
 some basic transformer models about computer vision
-[![standard-readme compliant](https://img.shields.io/badge/readme%20style-standard-brightgreen.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
+<!-- [![standard-readme compliant](https://img.shields.io/badge/readme%20style-standard-brightgreen.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme) -->
 <div id="top"></div>
 
 <!--
@@ -25,9 +25,9 @@ some basic transformer models about computer vision
 <!-- [![Forks][forks-shield]][forks-url] -->
 <!-- [![Stargazers][stars-shield]][stars-url] -->
 <!-- [![Issues][issues-shield]][issues-url] -->
-[![MIT License][license-shield]][https://github.com/LRY89757/Transformer-models-in-CV/blob/main/LICENSE]
+<!-- [![MIT License][license-shield]][https://github.com/LRY89757/Transformer-models-in-CV/blob/main/LICENSE] -->
 <!-- [![LinkedIn][twitter-shield]][linkedin-url] -->
-![![Twitter](https://twitter.com/lry89757)](https://img.shields.io/badge/<Twitter>-%231DA1F2.svg?style=for-the-badge&logo=Twitter&logoColor=white)
+<!-- ![![Twitter](https://twitter.com/lry89757)](https://img.shields.io/badge/<Twitter>-%231DA1F2.svg?style=for-the-badge&logo=Twitter&logoColor=white) -->
 
 
 <!-- PROJECT LOGO -->
@@ -47,7 +47,7 @@ some basic transformer models about computer vision
     <a href="https://github.com/LRY89757/Transformer-models-in-CV"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/LRY89757/Transformer-models-in-CV/blob/main/inference_detr_demo.py">View Detr Demo</a>
+    <a href="https://github.com/LRY89757/Transformer-models-in-CV/tree/main/demo">View Detr Demo</a>
     ·
     <a href="https://github.com/LRY89757/Transformer-models-in-CV/issues">Report Bug</a>
     ·
@@ -91,8 +91,24 @@ some basic transformer models about computer vision
 <!-- ABOUT THE PROJECT -->
 
 ## About The Project
+<!-- ![](demo/detr_demo.jpg) -->
+![![Product Name Screen Shot][product-screenshot]](demo/detr_demo.jpg)
+<!-- (https://example.com) -->
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+Here's my project of transformers mudules in computer vision. 
+I have inplemented the projects below:
+
+| Backbone | Models              | Demo for Inference |
+| -------- | ------------------- | ------------------ |
+| ✅ Resnet <br> ✅ Densenet <br> ✅ResNext | ✅ Vision Transformer <br> ✅ Transformer Encoder <br> ✅ Transfomer Decoder | ✅ Tiny DETR        |
+
+
+Under Construction:
+* 🚧 DETR
+
+To Do In the future:
+* 🕑 Swin Transformer
+* 🕑 MAE
 
 Here's a blank template to get started: To avoid retyping too much info. Do a search and replace with your text editor for the following: `github_username`, `repo_name`, `twitter_handle`, `linkedin_username`, `email`, `email_client`, `project_title`, `project_description`
 
@@ -102,14 +118,17 @@ Here's a blank template to get started: To avoid retyping too much info. Do a se
 
 ### Built With
 
-* [Next.js](https://nextjs.org/)
+<!-- * [Next.js](https://nextjs.org/)
 * [React.js](https://reactjs.org/)
 * [Vue.js](https://vuejs.org/)
 * [Angular](https://angular.io/)
 * [Svelte](https://svelte.dev/)
 * [Laravel](https://laravel.com)
 * [Bootstrap](https://getbootstrap.com)
-* [JQuery](https://jquery.com)
+* [JQuery](https://jquery.com) -->
+
+* pytorch
+
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -119,8 +138,10 @@ Here's a blank template to get started: To avoid retyping too much info. Do a se
 
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
+<!-- This is an example of how you may give instructions on setting up your project locally.
+To get a local copy up and running follow these simple example steps. -->
+
+
 
 ### Prerequisites
 
