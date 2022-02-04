@@ -101,7 +101,7 @@ class TransformerDecoder(nn.Module):
         for layer in self.decoder:
             out = layer(out, memory, query_pos=query_pos, pos=pos)
 
-        return out
+        return out.unsqueeze(0)
 
 
 if __name__ == "__main__":

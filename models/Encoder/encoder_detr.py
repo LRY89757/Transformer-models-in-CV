@@ -10,7 +10,7 @@ from utils.tools import _getactiv
 
 class EncoderLayer(nn.Module):
 
-    def __init__(self, embed_dim, num_heads, mlp_dim=256,
+    def __init__(self, embed_dim, num_heads:int, mlp_dim=256,
                  activ = "relu", dropout=0.0, norm_pre=True):
         super().__init__()
         
@@ -82,11 +82,9 @@ class EncoderLayer(nn.Module):
 
 class TransformerEncoder(nn.Module):
 
-    def __init__(self, num_layers, embed_dim, num_heads, mlp_dim,
+    def __init__(self, num_layers, embed_dim, num_heads:int, mlp_dim,
                  activ = "relu", dropout=0.1, norm_pre=True):
         super().__init__()
-        # self.encoder = nn.Sequential(*[EncoderLayer(embed_dim, num_heads, mlp_dim, activ, dropout, norm_pre)
-        #                                  for i in range(num_layers)])
         self.encoder = nn.ModuleList([EncoderLayer(embed_dim, num_heads, mlp_dim, activ, dropout, norm_pre)
                                          for i in range(num_layers)])        
     
