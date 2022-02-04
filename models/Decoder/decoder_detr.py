@@ -88,7 +88,7 @@ class DecoderLayer(nn.Module):
         else:
             return self.forward_post(query_obj, memory, query_pos=query_pos, pos=pos)
 
-class Decoder(nn.Module):
+class TransformerDecoder(nn.Module):
     def __init__(self, num_layers, embed_dim, 
             num_heads=8, activ="relu", dropout=0.1, mlp_dim=512, norm_pre=True):
         super().__init__()
@@ -106,7 +106,7 @@ class Decoder(nn.Module):
 
 if __name__ == "__main__":
     query_obj = torch.randn(100, 64, 32)  # [query_num, B, D]
-    decoder = Decoder(6, 32, norm_pre=False)
+    decoder = TransformerDecoder(6, 32, norm_pre=False)
     memory = torch.rand(50, 64, 32)  # [T, B, D]
     query_pos = torch.rand(query_obj.shape)
     pos = torch.rand(memory.shape)
