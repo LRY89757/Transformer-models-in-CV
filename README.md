@@ -1,7 +1,10 @@
 <div id="top"></div>
 
 # Transformer-models-in-CV
-some basic transformer models about computer vision
+some basic transformer models about computer vision.
+
+<!-- Refer to the badnets-pytorch's readme -->
+
 <!-- [![standard-readme compliant](https://img.shields.io/badge/readme%20style-standard-brightgreen.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme) -->
 
 <!--
@@ -72,10 +75,10 @@ some basic transformer models about computer vision
     </li>
     <li>
       <a href="#getting-started">Getting Started</a>
-      <ul>
+      <!-- <ul>
         <li><a href="#prerequisites">Prerequisites</a></li>
         <li><a href="#installation">Installation</a></li>
-      </ul>
+      </ul> -->
     </li>
     <li><a href="#usage">Usage</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
@@ -111,13 +114,19 @@ To Do In the future:
 * 🕑 Swin Transformer
 * 🕑 MAE
 
-Here's a blank template to get started: To avoid retyping too much info. Do a search and replace with your text editor for the following: `github_username`, `repo_name`, `twitter_handle`, `linkedin_username`, `email`, `email_client`, `project_title`, `project_description`
+<!-- Here's a blank template to get started: To avoid retyping too much info. Do a search and replace with your text editor for the following: `github_username`, `repo_name`, `twitter_handle`, `linkedin_username`, `email`, `email_client`, `project_title`, `project_description` -->
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
 
-### Built With
+### Built With Papers
+
+* [Deep Residual Learning for Image Recognition](https://arxiv.org/abs/2010.11929)
+* [Densely Connected Convolutional Networks](https://arxiv.org/abs/1608.06993)
+* [Attention Is All You Need](https://arxiv.org/abs/1706.03762)
+* [An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale](https://arxiv.org/abs/2010.11929)
+* [End-to-End Object Detection with Transformers](https://arxiv.org/abs/2005.12872)
 
 <!-- * [Next.js](https://nextjs.org/)
 * [React.js](https://reactjs.org/)
@@ -142,16 +151,26 @@ Here's a blank template to get started: To avoid retyping too much info. Do a se
 <!-- This is an example of how you may give instructions on setting up your project locally.
 To get a local copy up and running follow these simple example steps. -->
 
+1. 👋Give the project a star⭐!
+2. 🔥Clone the repo.
+   ```sh
+   git clone https://github.com/LRY89757/Transformer-models-in-CV.git
+   ```
+3. 💼install relevant packages:
+   ```sh
+   pip install -r requirements.txt
+   ```
+4. 
 
 
 ### Prerequisites
 
 This is an example of how to list things you need to use the software and how to install them.
 
-* npm
+* requirements
 
   ```sh
-  npm install npm@latest -g
+  pip install -r requirements.txt
   ```
 
 ### Installation
@@ -184,9 +203,14 @@ This is an example of how to list things you need to use the software and how to
 
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+<!-- Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
 
-_For more examples, please refer to the [Documentation](https://example.com)_
+_For more examples, please refer to the [Documentation](https://example.com)_ -->
+
+### Download dataset
+
+
+
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
