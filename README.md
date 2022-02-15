@@ -217,7 +217,7 @@ _For more examples, please refer to the [Documentation](https://example.com)_ --
 
 
 <!-- ROADMAP -->
-
+<!-- 
 ## Roadmap
 
 - [ ] Feature 1
@@ -229,7 +229,7 @@ See the [open issues](https://github.com/LRY89757/Transformer-models-in-CV/issue
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-
+ -->
 
 <!-- CONTRIBUTING -->
 
@@ -274,7 +274,7 @@ Project Link: [https://github.com/LRY89757/Transformer-models-in-CV](https://git
 
 
 <!-- ACKNOWLEDGMENTS -->
-
+<!-- 
 ## Acknowledgments
 
 * []()
@@ -300,4 +300,4 @@ Project Link: [https://github.com/LRY89757/Transformer-models-in-CV](https://git
 [license-url]: https://github.com/LRY89757/Transformer-models-in-CV/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/linkedin_username
-[product-screenshot]: images/screenshot.png
+[product-screenshot]: images/screenshot.png -->
