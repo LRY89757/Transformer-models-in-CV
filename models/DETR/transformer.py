@@ -38,4 +38,6 @@ if __name__ == "__main__":
     transformer = Transformer(512, 8)
     out, memo = transformer(src, src_pos, query_pos)
     print("transformer's decoder shape:", out.shape)
+# transformer's decoder shape: torch.Size([1, 32, 100, 512])
     print("transformer's encoder shape:", memo.shape)
+# transformer's encoder shape: torch.Size([32, 512, 28, 28])
