@@ -172,7 +172,7 @@ This is an example of how to list things you need to use the software and how to
   ```sh
   pip install -r requirements.txt
   ```
-
+<!-- 
 ### Installation
 
 1. Get a free API Key at [https://example.com](https://example.com)
@@ -197,22 +197,22 @@ This is an example of how to list things you need to use the software and how to
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-
+ -->
 
 <!-- USAGE EXAMPLES -->
 
-## Usage
+<!-- ## Usage -->
 
 <!-- Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
 
 _For more examples, please refer to the [Documentation](https://example.com)_ -->
 
-### Download dataset
+<!-- ### Download dataset -->
 
 
 
 
-<p align="right">(<a href="#top">back to top</a>)</p>
+<!-- <p align="right">(<a href="#top">back to top</a>)</p> -->
 
 
 
@@ -287,8 +287,7 @@ Project Link: [https://github.com/LRY89757/Transformer-models-in-CV](https://git
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-
-[contributors-shield]: https://img.shields.io/github/contributors/github_username/repo_name.svg?style=for-the-badge
+<!-- [contributors-shield]: https://img.shields.io/github/contributors/github_username/repo_name.svg?style=for-the-badge
 [contributors-url]: https://github.com/LRY89757/Transformer-models-in-CV/graphs/contributors
 [forks-shield]: https://img.shields.io/github/forks/github_username/repo_name.svg?style=for-the-badge
 [forks-url]: https://github.com/LRY89757/Transformer-models-in-CV/network/members
@@ -300,4 +299,4 @@ Project Link: [https://github.com/LRY89757/Transformer-models-in-CV](https://git
 [license-url]: https://github.com/LRY89757/Transformer-models-in-CV/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/linkedin_username
-[product-screenshot]: images/screenshot.png -->
+[product-screenshot]: images/screenshot.png  -->
