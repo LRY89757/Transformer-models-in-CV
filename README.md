@@ -265,7 +265,7 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 ## Contact
 
 
-Your Name - [@lry89757](https://twitter.com/lry89757) - lry89757@gmail.com
+My Name - [@lry89757](https://twitter.com/lry89757) - lry89757@gmail.com
 
 Project Link: [https://github.com/LRY89757/Transformer-models-in-CV](https://github.com/LRY89757/Transformer-models-in-CV)
 
