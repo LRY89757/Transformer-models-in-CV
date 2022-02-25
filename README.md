@@ -39,7 +39,7 @@ some basic transformer models about computer vision.
 
 <div align="center">
   <a href="https://github.com/LRY89757/Transformer-models-in-CV">
-    <img src="images/logo.png" alt="Logo" width="400" height="400">
+    <img src="images/logo.png" alt="Logo" width="450" height="360">
   </a>
 
 
