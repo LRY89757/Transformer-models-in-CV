@@ -557,94 +557,6 @@ class SwinTransformer(nn.Module):
         return flops
 
 
-
-        
-
-        
-
-
-
-
-
- 
-
-
-        
-
-
-
-        
-
-
-
-
-
-
-       
-
-
-
-        
-
-
-
-
-
-
-
-       
-
- 
-
-
-
-
-
-
-
-        
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 if __name__ == "__main__":
 
     import numpy as np 
@@ -720,5 +632,6 @@ if __name__ == "__main__":
         x, shifts=(-shift_size, -shift_size), dims=(1, 2))
     else:
         shifted_x = x
+
 
 
