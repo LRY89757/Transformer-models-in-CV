@@ -470,7 +470,7 @@ class PatchEmbed(nn.Module):
  
 class SwinTransformer(nn.Module):
     r""" Swin Transformer
-        A PyTorch impl of : `Swin Transformer: Hierarchical Vision Transformer using Shifted Windows`  -
+        A PyTorch implemention of : `Swin Transformer: Hierarchical Vision Transformer using Shifted Windows`  -
           https://arxiv.org/pdf/2103.14030
 
     Args:
@@ -499,7 +499,82 @@ class SwinTransformer(nn.Module):
                 drop_rate=0, attn_drop_rate=0, drop_path_rate=0.1, norm_layer=nn.LayerNorm, 
                 ape=False, patch_norm=True, use_checkpoint=False):
         super().__init__()
+
+        # split the image into the non-overlap patches
+        self.patch_partition = PatchEmbed(img_size, patch_size, in_chans, 
+                                    embed_dim, norm_layer)
         
+        self.pos_drop = nn.Dropout(drop_rate)
+
+        # stochastic depth
+        dpr = [x.item() for x in torch.linspace(0, drop_path_rate, sum(depths))]  # stochastic depth decay rule
+
+        self.layers = nn.ModuleList()
+        for i, (depth, head) in enumerate(zip(depths, nums_head)):
+            layer = BasicLayer(embed_dim * (2 ** 2), (img_size[0]//(4 * 2**i), img_size[1] // (4 * 2**i)),
+                                 depth, head, window_size, mlp_ratio, qkv_bias, qk_scale, drop_rate, 
+                                 attn_drop_rate, drop_path_rate, norm_layer, downsample=PatchMerging if i < len(depths)-1 else None, use_chekpoint=use_checkpoint)
+            self.layers.append(layer)
+        
+        self.norm = norm_layer(embed_dim * 2 ** (len(depths) - 1))
+        self.avgpool = nn.AdaptiveAvgPool1d(1)
+        self.head = nn.Linear(embed_dim * 2 ** (len(depths) - 1), num_classes)
+    
+ 
+        self.apply(self._init_weights)
+
+    def _init_weights(self, m):
+        if isinstance(m, nn.Linear):
+            trunc_normal_(m.weight, std=.02)
+            if isinstance(m, nn.Linear) and m.bias is not None:
+                nn.init.constant_(m.bias, 0)
+        elif isinstance(m, nn.LayerNorm):
+            nn.init.constant_(m.bias, 0)
+            nn.init.constant_(m.weight, 1.0)
+
+    def forward_features(self, x):
+        x = self.patch_partition(x)
+        x = self.pos_drop(x)
+        for layer in self.layers:
+            x = layer(x)
+        x = self.norm(x)
+        x = self.avgpool(x.transpose(1, 2))  # B C 1
+        x = torch.flatten(x, 1)
+        return x
+    
+    def forward(self, x):
+        x = self.forward_features(x)
+        x = self.head(x)
+        return x
+
+    def flops(self):
+        flops = 0
+        flops += self.patch_embed.flops()
+        for i, layer in enumerate(self.layers):
+            flops += layer.flops()
+        flops += self.num_features * self.patches_resolution[0] * self.patches_resolution[1] // (2 ** self.num_layers)
+        flops += self.num_features * self.num_classes
+        return flops
+
+
+
+        
+
+        
+
+
+
+
+
+ 
+
+
+        
+
+
+
+        
+
 
 
 
