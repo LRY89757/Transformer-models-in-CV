@@ -1,3 +1,4 @@
+from curses import window
 import sys,os
 
 from cv2 import norm
@@ -76,7 +77,17 @@ def window_reverse(windows, window_size, H, W):
     Returns:
         x: (B, H, W, C)
     """
-    pass
+    B_, w_size, w_size, C = windows.shape
+    assert w_size == window_size, "the window size doesn't match!!"
+    h_num = H // window_size
+    w_num = W // window_size
+    num_windows = h_num * w_num 
+    B = B_ // num_windows
+    windows = windows.view(B, h_num, w_num, window_size, window_size, C).contigous().permute(0, 1, 3, 2, 4, 5)
+    x = windows.view(B, H, W, C)
+    return x
+
+
 
 
     
@@ -217,7 +228,122 @@ class SwinTransformerBlock(nn.Module):
         self.mlp = MLP(dim, hidden_mlp, out_dim=dim, layer_num=3, acti_layer=act_layer, dropout=drop)
 
         self.drop_path = DropPath(drop_path) if drop_path > 0. else nn.Identity()
+
+        if shift_size > 0:
+            H, W = self.input_resolution
+            img_mask = torch.zeros(1, H, W, 1)
+
+            h_slices = [slice(0, -window_size),
+                        slice(-window_size, -shift_size),
+                        slice(-shift_size, None)]
+            w_slices = [slice(0, -window_size),
+                        slice(-window_size, -shift_size),
+                        slice(-shift_size, None)]
+            
+            cnt = 0
+            for h in h_slices:
+                for w in w_slices:
+                    img_mask[1, h, w, 1] = cnt
+                    cnt += 1
+            mask_window = window_partition(img_mask, window_size)
+            mask_window = mask_window.view(-1, window_size, window_size)
+            attn_mask = mask_window.unsqueeze(1) - mask_window.unsqueeze(2)
+            attn_mask = mask_window.masked_fill(attn_mask!=0, -100.0).masked_fill(attn_mask==0, 0.)
+        else:
+            attn_mask = None
         
+        self.register_buffer("attn_mask", attn_mask)
+    
+    def forward(self, x):
+        '''
+        x's shape: [B, N, C]
+        '''
+        H, W = self.input_resolution
+        B, N, C = x.shape
+        assert N == H * W, "input feature has wrong size"
+
+        shortcut = x
+        x = self.norm1(x)
+        x = x.view(B, H, W, C)
+        if self.shift_size > 0:
+            shift_x = torch.roll(x, shifts=(-self.shift_size, -self.shift_size), 
+                                dims=(1, 2))
+        else:
+            shift_x = x
+
+        x = window_partition(shift_x, self.window_size)
+        x = x.view(x.shape[0], -1, C)
+        
+        attn = self.attn(x, mask=self.attn_mask).view(x.shape[0], self.window_size, self.window_size, C)
+
+        attn = window_reverse(attn, self.window_size, H, W)
+        
+        if self.shift_size > 0:
+            shift_x = torch.roll(attn, shifts=(self.shift_size, self.shift_size),
+                                dims=(1, 2))
+        else:
+            shift_x = attn
+        
+        out = self.drop_path(shift_x.view(B, -1, C)) + shortcut
+
+        shortcut = out
+        out = self.drop_path(self.mlp(self.norm2(out))) + shortcut
+
+        return out
+
+    def extra_repr(self) -> str:
+        return f"dim={self.dim}, input_resolution={self.input_resolution}, num_heads={self.num_heads}, " \
+               f"window_size={self.window_size}, shift_size={self.shift_size}, mlp_ratio={self.mlp_ratio}"
+
+    def flops(self):
+        flops = 0
+        H, W = self.input_resolution
+        # norm1
+        flops += self.dim * H * W
+        # W-MSA/SW-MSA
+        nW = H * W / self.window_size / self.window_size
+        flops += nW * self.attn.flops(self.window_size * self.window_size)
+        # mlp
+        flops += 2 * H * W * self.dim * self.dim * self.mlp_ratio
+        # norm2
+        flops += self.dim * H * W
+        return flops
+
+
+
+class PatchMerging(nn.Module):
+    r""" Patch Merging Layer.
+
+    Args:
+        input_resolution (tuple[int]): Resolution of input feature.
+        dim (int): Number of input channels.
+        norm_layer (nn.Module, optional): Normalization layer.  Default: nn.LayerNorm
+    """
+    def __init__(self, input_resolution, dim, normlayer=nn.LayerNorm):
+        super().__init__()
+        self.normlayer = normlayer(dim)
+        self.input_resolution = input_resolution
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -292,9 +418,6 @@ if __name__ == "__main__":
     relative_position_index = relative_coords.sum(-1)  # Wh*Ww, Wh*Ww
     print("the position_index 's shape", relative_position_index)
 
-
-
-
     # # define a parameter table of relative position bias
     # self.relative_position_bias_table = nn.Parameter(
     #     torch.zeros((2 * window_size[0] - 1) * (2 * window_size[1] - 1), num_heads))  # 2*Wh-1 * 2*Ww-1, nH
@@ -315,3 +438,15 @@ if __name__ == "__main__":
     # relative_position_index = relative_coords.sum(-1)  # Wh*Ww, Wh*Ww
     # self.register_buffer("relative_position_index",
     #                      relative_position_index)
+
+    # test the torch.roll
+    # cyclic shift
+    shift_size = 4
+    x = torch.rand(32, 224, 224, 3)
+    if shift_size > 0:
+        shifted_x = torch.roll(
+        x, shifts=(-shift_size, -shift_size), dims=(1, 2))
+    else:
+        shifted_x = x
+
+
