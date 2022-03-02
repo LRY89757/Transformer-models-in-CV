@@ -129,7 +129,8 @@ To Do In the future:
 * [Attention Is All You Need](https://arxiv.org/abs/1706.03762)
 * [An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale](https://arxiv.org/abs/2010.11929)
 * [End-to-End Object Detection with Transformers](https://arxiv.org/abs/2005.12872)
-
+* [Swin Transformer: Hierarchical Vision Transformer using Shifted Windows](https://arxiv.org/abs/2103.14030)
+* [Masked Autoencoders Are Scalable Vision Learners](https://arxiv.org/abs/2111.06377)
 <!-- * [Next.js](https://nextjs.org/)
 * [React.js](https://reactjs.org/)
 * [Vue.js](https://vuejs.org/)
