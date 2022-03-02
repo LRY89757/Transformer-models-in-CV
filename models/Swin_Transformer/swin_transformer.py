@@ -558,80 +558,97 @@ class SwinTransformer(nn.Module):
 
 
 if __name__ == "__main__":
+    
 
-    import numpy as np 
+    
 
-    # test the window_patition:
-    x = torch.randn(32, 21, 21, 3)
-    window_size1 = 7
-    window_size2 = 8
-    out1 = window_partition(x, window_size=window_size1)
-    # out2 = window_partition(x, window_size2)
-    # out3 = window_partition_(x, window_size1)
-    print("out1 size:", out1.shape)
-    # print("out2 size:", out2.shape)
-    # print("out3 size:", out3.shape)
-    # print("out1 == out3?:", np.any(np.array(out1 == out3)))
 
-    # @ operator
-    a = x @ torch.randn(3, 4)
-    print(a.shape)
 
-    # test the position code of transformer
-    window_size = [7, 7]
-    coords_h = torch.arange(window_size[0])
-    coords_w = torch.arange(window_size[1])
-    coords = torch.stack(torch.meshgrid([coords_h, coords_w]))
-    print("the meshgrid:", torch.meshgrid([coords_h, coords_w]))
-    print("the stack:", coords)
-    print("the shape of stack :", coords.shape)
-    coords_flatten = torch.flatten(coords, 1)  # 2, Wh*Ww
-    print("the shape of coords_flatten:", coords_flatten.shape)
-    print("the matrix of coords_flatten:", coords_flatten)
-    relative_coords = coords_flatten[:, :, None] - \
-        coords_flatten[:, None, :]  # 2, Wh*Ww, Wh*Ww
-    print("relative_coords:", relative_coords.shape)
-    print("the shape of coords_flatten[:, :, None]", coords_flatten[:, :, None].shape)
-    print("the shape of coords_flatten[:, None, :]", coords_flatten[:, None, :].shape)
-    relative_coords = relative_coords.permute(
-        1, 2, 0).contiguous()  # Wh*Ww, Wh*Ww, 2
-    relative_coords[:, :, 0] += window_size[0] - \
-        1  # shift to start from 0
-    relative_coords[:, :, 1] += window_size[1] - 1
-    relative_coords[:, :, 0] *= 2 * window_size[1] - 1
-    relative_position_index = relative_coords.sum(-1)  # Wh*Ww, Wh*Ww
-    print("the position_index 's shape", relative_position_index)
 
-    # # define a parameter table of relative position bias
-    # self.relative_position_bias_table = nn.Parameter(
-    #     torch.zeros((2 * window_size[0] - 1) * (2 * window_size[1] - 1), num_heads))  # 2*Wh-1 * 2*Ww-1, nH
 
-    # # get pair-wise relative position index for each token inside the window
-    # coords_h = torch.arange(self.window_size[0])
-    # coords_w = torch.arange(self.window_size[1])
-    # coords = torch.stack(torch.meshgrid([coords_h, coords_w]))  # 2, Wh, Ww
+
+
+
+
+
+
+
+
+
+
+    # import numpy as np 
+
+    # # test the window_patition:
+    # x = torch.randn(32, 21, 21, 3)
+    # window_size1 = 7
+    # window_size2 = 8
+    # out1 = window_partition(x, window_size=window_size1)
+    # # out2 = window_partition(x, window_size2)
+    # # out3 = window_partition_(x, window_size1)
+    # print("out1 size:", out1.shape)
+    # # print("out2 size:", out2.shape)
+    # # print("out3 size:", out3.shape)
+    # # print("out1 == out3?:", np.any(np.array(out1 == out3)))
+
+    # # @ operator
+    # a = x @ torch.randn(3, 4)
+    # print(a.shape)
+
+    # # test the position code of transformer
+    # window_size = [7, 7]
+    # coords_h = torch.arange(window_size[0])
+    # coords_w = torch.arange(window_size[1])
+    # coords = torch.stack(torch.meshgrid([coords_h, coords_w]))
+    # print("the meshgrid:", torch.meshgrid([coords_h, coords_w]))
+    # print("the stack:", coords)
+    # print("the shape of stack :", coords.shape)
     # coords_flatten = torch.flatten(coords, 1)  # 2, Wh*Ww
+    # print("the shape of coords_flatten:", coords_flatten.shape)
+    # print("the matrix of coords_flatten:", coords_flatten)
     # relative_coords = coords_flatten[:, :, None] - \
     #     coords_flatten[:, None, :]  # 2, Wh*Ww, Wh*Ww
+    # print("relative_coords:", relative_coords.shape)
+    # print("the shape of coords_flatten[:, :, None]", coords_flatten[:, :, None].shape)
+    # print("the shape of coords_flatten[:, None, :]", coords_flatten[:, None, :].shape)
     # relative_coords = relative_coords.permute(
     #     1, 2, 0).contiguous()  # Wh*Ww, Wh*Ww, 2
-    # relative_coords[:, :, 0] += self.window_size[0] - \
+    # relative_coords[:, :, 0] += window_size[0] - \
     #     1  # shift to start from 0
-    # relative_coords[:, :, 1] += self.window_size[1] - 1
-    # relative_coords[:, :, 0] *= 2 * self.window_size[1] - 1
+    # relative_coords[:, :, 1] += window_size[1] - 1
+    # relative_coords[:, :, 0] *= 2 * window_size[1] - 1
     # relative_position_index = relative_coords.sum(-1)  # Wh*Ww, Wh*Ww
-    # self.register_buffer("relative_position_index",
-    #                      relative_position_index)
+    # print("the position_index 's shape", relative_position_index)
 
-    # test the torch.roll
-    # cyclic shift
-    shift_size = 4
-    x = torch.rand(32, 224, 224, 3)
-    if shift_size > 0:
-        shifted_x = torch.roll(
-        x, shifts=(-shift_size, -shift_size), dims=(1, 2))
-    else:
-        shifted_x = x
+    # # # define a parameter table of relative position bias
+    # # self.relative_position_bias_table = nn.Parameter(
+    # #     torch.zeros((2 * window_size[0] - 1) * (2 * window_size[1] - 1), num_heads))  # 2*Wh-1 * 2*Ww-1, nH
+
+    # # # get pair-wise relative position index for each token inside the window
+    # # coords_h = torch.arange(self.window_size[0])
+    # # coords_w = torch.arange(self.window_size[1])
+    # # coords = torch.stack(torch.meshgrid([coords_h, coords_w]))  # 2, Wh, Ww
+    # # coords_flatten = torch.flatten(coords, 1)  # 2, Wh*Ww
+    # # relative_coords = coords_flatten[:, :, None] - \
+    # #     coords_flatten[:, None, :]  # 2, Wh*Ww, Wh*Ww
+    # # relative_coords = relative_coords.permute(
+    # #     1, 2, 0).contiguous()  # Wh*Ww, Wh*Ww, 2
+    # # relative_coords[:, :, 0] += self.window_size[0] - \
+    # #     1  # shift to start from 0
+    # # relative_coords[:, :, 1] += self.window_size[1] - 1
+    # # relative_coords[:, :, 0] *= 2 * self.window_size[1] - 1
+    # # relative_position_index = relative_coords.sum(-1)  # Wh*Ww, Wh*Ww
+    # # self.register_buffer("relative_position_index",
+    # #                      relative_position_index)
+
+    # # test the torch.roll
+    # # cyclic shift
+    # shift_size = 4
+    # x = torch.rand(32, 224, 224, 3)
+    # if shift_size > 0:
+    #     shifted_x = torch.roll(
+    #     x, shifts=(-shift_size, -shift_size), dims=(1, 2))
+    # else:
+    #     shifted_x = x
 
 
 
