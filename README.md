@@ -104,7 +104,7 @@ I have inplemented the projects below:
 
 | Backbone | Models              | Demo for Inference |
 | -------- | ------------------- | ------------------ |
-| ✅ Resnet <br> ✅ Densenet <br> ✅ ResNext | ✅ Vision Transformer <br> ✅ Transformer Encoder <br> ✅ Transfomer Decoder | ✅ Tiny DETR <br> ✅ Swin Transformer <br> ✅ DETR       |
+| ✅ Resnet <br> ✅ Densenet <br> ✅ ResNext | ✅ Vision Transformer <br> ✅ Transformer Encoder <br> ✅ Transfomer Decoder <br> ✅ Swin Transformer <br> ✅ DETR | ✅ Tiny DETR <br> ✅ Swin Transformer <br> ✅ DETR       |
 
 
 Under Construction:
