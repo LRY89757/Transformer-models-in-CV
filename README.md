@@ -104,14 +104,15 @@ I have inplemented the projects below:
 
 | Backbone | Models              | Demo for Inference |
 | -------- | ------------------- | ------------------ |
-| ✅ Resnet <br> ✅ Densenet <br> ✅ ResNext | ✅ Vision Transformer <br> ✅ Transformer Encoder <br> ✅ Transfomer Decoder | ✅ Tiny DETR        |
+| ✅ Resnet <br> ✅ Densenet <br> ✅ ResNext | ✅ Vision Transformer <br> ✅ Transformer Encoder <br> ✅ Transfomer Decoder | ✅ Tiny DETR <br> ✅ Swin Transformer <br> ✅ DETR       |
 
 
 Under Construction:
-* 🚧 DETR
+* ~~🚧 DETR~~
+* 🚧 MAE
 
 To Do In the future:
-* 🕑 Swin Transformer
+* ~~🕑 Swin Transformer~~
 * 🕑 MAE
 * 🕑 DEiT
 
